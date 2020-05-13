@@ -15,8 +15,8 @@
                 <p>Please fill in this form to create an account.</p>
             
             
-              <label for="email"><b>Email</b></label>
-                <input type="text" name="email" required placeholder="Enter Email">
+              <label for="username"><b>Username</b></label>
+                <input type="text" name="username" required placeholder="Enter Username">
             
               <label for="psw"><b>Password</b></label>
                 <input type="password" name="psw" required placeholder="Enter Password">
@@ -28,6 +28,7 @@
                <button type="submit" class="signupbtn">Sign Up</button>
         </form>
             <br>
+
             <a href="{{ url_for('login') }}">Already have an account? </a>
     </div>
         

@@ -1,12 +1,11 @@
 import os
 import datetime
 
-
-from flask import Flask, session, redirect
+from flask import Flask, render_template, request, session, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from flask import Flask, render_template, request
+
 
 app = Flask(__name__)
 
@@ -39,16 +38,18 @@ def register():
     elif request.method == "POST":
         
         #Checks if email is already taken
-        taken_email = db.execute("SELECT * FROM users WHERE email = :email",
-                                {"email":request.form.get("email")}).fetchone()
+        taken_email = db.execute("SELECT * FROM users WHERE username = :username",
+                                {"username":request.form.get("username")}).fetchone()
         if taken_email:
-            return render_template("error.html", message="E-mail already taken")
+            return render_template("error.html", message="Username already taken")
 
-        #
+        #Check if password is matching confirmed password
+        elif not request.form.get("psw") == request.form.get("psw2"):
+            return render_template("error.html", message="Passwords do not match")
  
         #Sends submitted email and password to database
-        db.execute("INSERT INTO users (email, password) VALUES (:email, :password)",
-                    {"email":request.form.get("email"), "password":request.form.get("psw")})
+        db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
+                    {"username":request.form.get("username"), "password":request.form.get("psw")})
         db.commit()
 
     return redirect("/login")
@@ -62,11 +63,11 @@ def login():
     
     elif request.method == "POST":
 
-        login = db.execute("SELECT * FROM users WHERE email = :email AND password = :password",
-                    {"email":request.form.get("email"), "password":request.form.get("psw")}).fetchall()
+        login = db.execute("SELECT * FROM users WHERE username = :username AND password = :password",
+                    {"username":request.form.get("username"), "password":request.form.get("psw")}).fetchall()
         
         if not login:
-            return render_template("error.html", message="Wrong email or password")
+            return render_template("error.html", message="Wrong username or password")
         else:
             return render_template("index.html")
             

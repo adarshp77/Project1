@@ -7,7 +7,7 @@
         <title>Book Review</title>
        
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <a class="navbar-brand" href="#">Home</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,11 +17,7 @@
                 <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
               </div>
             </div>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-primary" type="submit">Search</button>
-               <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-              </form>
+           
           </nav>
     
     </head>
