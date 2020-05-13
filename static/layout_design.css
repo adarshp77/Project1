@@ -1,0 +1,38 @@
+body {
+    background-image: url("pics/librarybackground.jpg");
+    background-color: rgba(255, 255, 255, 0.1);
+    background-blend-mode: lighten;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+.bg-light {
+    background-color:  #e0dad4;
+    opacity: 0.9;
+  }
+
+h1{
+    color: #e0dad4;
+    font-weight: bold;
+    font-size: 500%;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;    
+}
+
+.content-section {
+    background: #e0dad4;
+    padding: 20px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 77px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+
+  label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+  }
