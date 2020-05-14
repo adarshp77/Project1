@@ -12,14 +12,13 @@ Home
         <div class = "container">
 
             {% if session["user_id"] %}
-            <form class ="form-inline" action="/search" method="GET">
-            
-                <input class="form-control mr-sm-2" name="user_search" type="search" placeholder="Search for books" aria-label="Search">
+            <form class ="form-inline">
+
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for books" aria-label="Search" name="user_search">
                 <button class="btn btn-primary" type="submit">Search</button>
 
             </form>
             {% endif %}
-
 
             {% if not session["user_id"] %}
                 
@@ -27,7 +26,7 @@ Home
                     
             {% endif %}
             <br>
-            {{ message }}
+           
         </div>
     </div>
 

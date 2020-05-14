@@ -7,7 +7,7 @@
         <title>Book Review</title>
        
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+            <a class="navbar-brand" href="{{ url_for('login') }}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -17,7 +17,7 @@
                     <a class="nav-item nav-link" href="{{ url_for('register') }}">Sign up</a>
                     <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
                     {% endif %}
-                    
+
                 {% if session["user_id"] %}
                 <li class="nav-item item">
                     <a class="nav-link" href="{{ url_for('logout') }}">Log Out </a>

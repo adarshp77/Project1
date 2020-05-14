@@ -1,6 +1,7 @@
 import os
 import datetime
 
+
 from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
@@ -78,5 +79,31 @@ def login():
 def logout():
     session.pop("user_id")
     return render_template("index.html", message="Log out successful")
-            
+
+@app.route("/search", methods=["GET"])
+def search():
+
+    if request.method == "GET":
+        return render_template("index.html")
+
+    if not request.args.get("user_search"):
+        return render_template("error.html", message="you must provide a book.")
+
+    query = "%" + request.args.get("user_search") + "%"
+    query = query.title()
+    
+    rows = db.execute("SELECT isbn, title, author, year FROM books WHERE \
+                        isbn LIKE :query OR \
+                        title LIKE :query OR \
+                        author LIKE :query LIMIT 15",
+                        {"query": query})
+    
+    # Books not founded
+    if rows.rowcount == 0:
+        return render_template("error.html", message="we can't find books with that description.")
+    
+    # Fetch all the results
+    books = rows.fetchall()
+
+    return render_template("results.html", books=books)
         
