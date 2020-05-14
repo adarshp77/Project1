@@ -12,10 +12,19 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{{ url_for('register') }}">Sign up</a>
-                <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
-              </div>
+                <div class="navbar-nav">
+                    {% if not session["user_id"] %}
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Sign up</a>
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Log in</a>
+                    {% endif %}
+                    
+                {% if session["user_id"] %}
+                <li class="nav-item item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Log Out </a>
+                </li>
+                {% endif %}
+              
+                </div>
             </div>
            
           </nav>

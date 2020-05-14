@@ -1,13 +1,14 @@
 import os
 import datetime
 
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 app = Flask(__name__)
+app.secret_key = "a6154sfdh5698hs7dn32"
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -68,7 +69,14 @@ def login():
         
         if not login:
             return render_template("error.html", message="Wrong username or password")
+        
         else:
+            session["user_id"] = login[0][0]
             return render_template("index.html")
+
+@app.route("/logout")
+def logout():
+    session.pop("user_id")
+    return render_template("index.html", message="Log out successful")
             
         
